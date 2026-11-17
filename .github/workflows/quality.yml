@@ -20,6 +20,6 @@ jobs:
           cache: maven
 
       - name: Build and run the tests
-        run: ./mvnw -B clean test
+        run: ./mvnw clean test
 
       # Additional steps can be added here.
