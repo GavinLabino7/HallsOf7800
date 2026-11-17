@@ -19,6 +19,9 @@ jobs:
           java-version: '17'
           cache: maven
 
+      - name: Allow build to pass with chmod 
+        run: chmod +x mvnw
+
       - name: Build and run the tests
         run: ./mvnw clean test
 
