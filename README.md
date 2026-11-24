@@ -32,16 +32,18 @@ macOS / Linux:
 
 Windows: use `mvnw.cmd` instead of `./mvnw` (in PowerShell, `.\mvnw.cmd`).
 
-The build also declares these plugins:
+The build also declares these quality-check plugins:
 
 ```bash
 ./mvnw test                                       # also writes a JaCoCo report to target/site/jacoco/
 ./mvnw org.pitest:pitest-maven:mutationCoverage   # PIT; report in target/pit-reports/
-./mvnw compile spotbugs:spotbugs spotbugs:gui     # SpotBugs
+./mvnw spotbugs:spotbugs                          # SpotBugs; SARIF in target/spotbugsSarif.json
 ```
 
-A GitHub Actions workflow in `.github/workflows/quality.yml` builds the project and runs the tests on
-every push and pull request.
+A GitHub Actions workflow in `.github/workflows/quality.yml` runs the JUnit regression tests, PIT
+mutation testing, and SpotBugs on every push and pull request. SpotBugs SARIF results are uploaded
+to GitHub Code Scanning when the workflow has permission to do so; uploads are skipped for forked
+pull requests.
 
 The first run takes a minute or two while dependencies download.
 
